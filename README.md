@@ -1,7 +1,5 @@
 # MERN Bookstore Application
 
-This is a full-stack web application built using the MERN stack. It allows users to manage books in a bookstore, with features like JWT-based authentication and book management.
-
 ## Features
 
 - **User Authentication**:
@@ -16,24 +14,11 @@ This is a full-stack web application built using the MERN stack. It allows users
     - Price
     - Year Published
 
-- **Responsive Design**:
-  - The application is designed to be responsive and works seamlessly on both desktop and mobile devices.
-
-- **Backend API**:
-  - RESTful API built with Node.js and Express.js.
-  - MongoDB for database storage.
-  - CRUD operations for managing books.
-
-- **Frontend**:
-  - Built with React.js for a dynamic user interface.
-  - State management using React hooks.
-
-## Technologies Used
-
 - **Frontend**:
   - React.js
   - Axios for API requests
   - React Router for navigation
+  - State management - React hooks.
 
 - **Backend**:
   - Node.js
@@ -48,8 +33,6 @@ This is a full-stack web application built using the MERN stack. It allows users
 
 
 # API Endpoints
-
-Below is a list of the available API endpoints for the MERN Bookstore Application. These endpoints allow users to interact with the application, including authentication and book management.
 
 ## Authentication
 

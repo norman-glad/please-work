@@ -1,19 +1,21 @@
-/* google font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap');
 
-/* layout */
 :root {
   --primary: #1aac83;
   --error: #e7195a;
 }
+
 body {
   background: #f1f1f1;
   margin: 0;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
 }
+
+/* Header */
 header {
   background: #fff;
 }
+
 header .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -22,44 +24,66 @@ header .container {
   align-items: center;
   justify-content: space-between;
 }
+
 header a {
   color: #333;
   text-decoration: none;
 }
-.pages{
+
+/* Pages wrapper */
+.pages {
   max-width: 1400px;
   padding: 20px;
   margin: 0 auto;
 }
 
-/* homepage */
+/* Home page layout */
 .home {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  gap: 100px;
+  gap: 60px;
 }
-.Book-details {
+
+.books-list p {
+  color: #666;
+  font-style: italic;
+}
+
+/* Book card */
+.book-details {
   background: #fff;
-  border-radius: 4px;
-  margin: 20px auto;
+  border-radius: 8px;
+  margin: 20px 0;
   padding: 20px;
   position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
-.Book-details h4 {
+
+.book-details h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
   color: var(--primary);
 }
-.Book-details p {
-  margin: 0;
+
+.book-details p {
+  margin: 4px 0;
   font-size: 0.9em;
   color: #555;
 }
-.Book-details span {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+
+.book-details .timestamp {
+  font-size: 0.8em;
+  color: #999;
+  margin-top: 12px;
+}
+
+.book-details .book-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.book-details .delete-btn {
   cursor: pointer;
   background: #f1f1f1;
   padding: 6px;
@@ -67,28 +91,52 @@ header a {
   color: #333;
 }
 
-/* new workout form */
+.book-details .delete-btn:hover {
+  background: var(--error);
+  color: white;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Forms */
 label, input {
   display: block;
 }
+
 input {
   padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin-top: 6px;
+  margin-bottom: 16px;
   width: 100%;
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
 }
+
 form button {
   background: var(--primary);
   border: 0;
   color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
+  padding: 10px 16px;
+  font-family: "Poppins", sans-serif;
   border-radius: 4px;
   cursor: pointer;
 }
+
+form button:hover {
+  opacity: 0.9;
+}
+
+form button[type="button"] {
+  background: #ddd;
+  color: #333;
+}
+
+/* Error messages */
 div.error {
   padding: 10px;
   background: #ffefef;
@@ -97,34 +145,57 @@ div.error {
   border-radius: 4px;
   margin: 20px 0;
 }
-input.error {
-  border: 1px solid var(--error);
-}
 
-/* navbar */
+/* Navbar */
 nav {
   display: flex;
   align-items: center;
 }
+
 nav a, nav button {
   margin-left: 10px;
 }
+
 nav button {
   background: #fff;
   color: var(--primary);
   border: 2px solid var(--primary);
   padding: 6px 10px;
   border-radius: 4px;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
   cursor: pointer;
   font-size: 1em;
 }
 
-/* auth forms */
+nav button:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Auth forms */
 form.signup, form.login {
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
   background: #fff;
   border-radius: 4px;
+}
+
+/* Profile page */
+.profile {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.profile h2 {
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.profile p {
+  margin: 8px 0;
+  color: #555;
 }

@@ -3,11 +3,10 @@
 ### ============================================
 
 # Server (local)
-@baseUrl = http://localhost:5555
-# @baseUrl = https://your-production-server.com
+# @baseUrl = http://localhost:5555
+@baseUrl = https://please-work-9eji.onrender.com
 
-
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NDM4YTI2OWNmNWNiMDZlY2VmOWI1MCIsImVtYWlsIjoiam9obkBleGFtcGxlLmNvbSIsImlhdCI6MTc2NjAzMzk1OCwiZXhwIjoxNzY2MDM3NTU4fQ.X-cEenih9eZpt6Oi87y_ukFm_4jgZ3ciSTWENYZy0Hs
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NDM4YTI2OWNmNWNiMDZlY2VmOWI1MCIsImVtYWlsIjoiam9obkBleGFtcGxlLmNvbSIsImlhdCI6MTc2NjAzNDM2MiwiZXhwIjoxNzY2MDM3OTYyfQ.Ip2Pu23bxxXogaKUCqtTShYKhg4t-YHcB9RCleDRrm4
 
 ### ============================================
 ### AUTHENTICATION 
@@ -45,7 +44,7 @@ GET {{baseUrl}}/api/signout
 GET {{baseUrl}}/api
 
 ### Get Book by ID (Public)
-@bookId = 69438aa69cf5cb06ecef9b55
+@bookId = 6754da3be5cf7da82c1a3760
 GET {{baseUrl}}/api/{{bookId}}
 
 ### Create a New Book

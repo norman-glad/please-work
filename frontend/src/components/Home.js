@@ -1,70 +1,43 @@
 import React from 'react'
 import './Home.css'
-import  CountUp  from 'react-countup';
-import minecraft from './minecraft.png'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 const MainHome = () => {
+  const navigate = useNavigate()
 
-   const navigate = useNavigate(); 
-
-
-    const handleSignup = () => {
-        navigate('/signup'); 
-    };
-
-    const handleProfile = () => {
-        navigate('/signin'); 
-    };
   return (
-    <section className = 'Landing-wrapper'>
-        <div className="hero-Container">
-            <div className="heroLeft">
-                <div className="heroTitle">
-                
-                    <h1>
-                        Library Management
-                    </h1>
-                </div>
-                <div className='heroDescription'>
-                    <span>Find a variety of books that will satisfy ur imagination</span>
-                </div>
-                <div className="buttons">
-                    <button onClick={handleSignup} >SignUp</button>
-                    <button onClick={handleProfile}>Go to your Profile</button>
-                </div>
-
-                <div className="stats">
-                    <div className="stat">
-                        <span>
-                            <CountUp start = {80000} end = {100000} duration ={4}/>
-                            <span>+</span>
-                            Books
-                        </span>
-                    </div>
-                    <div className="stat">
-                        <span>
-                            <CountUp start = {4000} end = {5000} duration ={4}/>
-                            <span>+</span>
-                            Members
-                        </span>
-                    </div>
-                    <div className="stat">
-                        <span>
-                            <CountUp start = {35} end = {45} duration ={4}/>
-                            <span>+</span>
-                            Genres
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div className="heroRight">
-                <div className="imageContainer">
-                    <img src={minecraft}  alt ='imageOne'/>
-                </div>
-            </div>
+    <section className="landing">
+      <div className="landing-content">
+        <h1>Library Management</h1>
+        <p>Find a variety of books that will satisfy your imagination</p>
+        
+        <div className="landing-buttons">
+          <button onClick={() => navigate('/signup')} className="btn-primary">
+            Get Started
+          </button>
+          <button onClick={() => navigate('/signin')} className="btn-secondary">
+            Sign In
+          </button>
         </div>
 
+        <div className="features">
+          <div className="feature">
+            <span className="feature-icon">📚</span>
+            <h3>Browse Books</h3>
+            <p>Explore our collection</p>
+          </div>
+          <div className="feature">
+            <span className="feature-icon">➕</span>
+            <h3>Add Books</h3>
+            <p>Contribute to the library</p>
+          </div>
+          <div className="feature">
+            <span className="feature-icon">✏️</span>
+            <h3>Manage Collection</h3>
+            <p>Edit and organize</p>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }

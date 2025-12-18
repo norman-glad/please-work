@@ -1,93 +1,92 @@
 import { useState } from "react"
 import { useBookContext } from "../hooks/useBookContext"
 import { useAuthContext } from '../hooks/useAuthContext'
-const apiUrl = process.env.REACT_APP_API_URL;
+
+const apiUrl = process.env.REACT_APP_API_URL
+
 const BookForm = () => {
-    const { dispatch } = useBookContext()
-    const { user } = useAuthContext()
+  const { dispatch } = useBookContext()
+  const { user } = useAuthContext()
 
-    const [title, setTitle] = useState('')
-    const [author, setAuthor] = useState('')
-    const [price, setPrice] = useState('')
-    const [yearPublished, setyearPublished] = useState('')
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [price, setPrice] = useState('')
+  const [yearPublished, setYearPublished] = useState('')
+  const [error, setError] = useState(null)
 
-    const [error, setError] = useState(null)
-    const [emptyFields, setEmptyFields] = useState([])
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-
-        if (!user) {
-            setError('You must be logged in')
-            return
-        }
-
-        const workout = { title, author, price, yearPublished }
-
-        const response = await fetch(`${apiUrl}/api`, {
-            method: 'POST',
-            body: JSON.stringify(workout),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${user.token}`
-            }
-        })
-        const json = await response.json()
-
-        if (!response.ok) {
-            setError(json.error)
-            setEmptyFields(json.emptyFields)
-        }
-        if (response.ok) {
-            setTitle('')
-            setAuthor('')
-            setPrice('')
-            setyearPublished('')
-            setError(null)
-            setEmptyFields([])
-            dispatch({ type: 'CREATE_BOOK', payload: json })
-        }
+    if (!user) {
+      setError('You must be logged in')
+      return
     }
 
-    return (
-        <form className="create" onSubmit={handleSubmit}>
-            <h3>Add a New Book</h3>
+    const book = { title, author, price, yearPublished }
 
-            <label>Book Title :</label>
-            <input
-                type="text"
-                onChange={(e) => setTitle(e.target.value)}
-                value={title}
-                className={emptyFields.includes('title') ? 'error' : ''}
-            />
+    const response = await fetch(`${apiUrl}/api`, {
+      method: 'POST',
+      body: JSON.stringify(book),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      }
+    })
+    const json = await response.json()
 
-            <label>Author Name :</label>
-            <input
-                type="text"
-                onChange={(e) => setAuthor(e.target.value)}
-                value={author}
-                className={emptyFields.includes('author') ? 'error' : ''}
-            />
+    if (!response.ok) {
+      setError(json.error || 'Failed to add book')
+    } else {
+      // clear form on success
+      setTitle('')
+      setAuthor('')
+      setPrice('')
+      setYearPublished('')
+      setError(null)
+      dispatch({ type: 'CREATE_BOOK', payload: json })
+    }
+  }
 
-            <label>Book Price :</label>
-            <input
-                type="number"
-                onChange={(e) => setPrice(e.target.value)}
-                value={price}
-                className={emptyFields.includes('price') ? 'error' : ''}
-            />
-            <label>Year Published :</label>
-            <input
-                type="number"
-                onChange={(e) => setyearPublished(e.target.value)}
-                value={yearPublished}
-                className={emptyFields.includes('yearPublished') ? 'error' : ''}
-            />
+  return (
+    <form className="create" onSubmit={handleSubmit}>
+      <h3>Add a New Book</h3>
 
-            <button>Add Book</button>
-            {error && <div className="error">{error}</div>}
-        </form>
-    )
+      <label>Book Title:</label>
+      <input
+        type="text"
+        onChange={(e) => setTitle(e.target.value)}
+        value={title}
+        required
+      />
+
+      <label>Author Name:</label>
+      <input
+        type="text"
+        onChange={(e) => setAuthor(e.target.value)}
+        value={author}
+        required
+      />
+
+      <label>Price:</label>
+      <input
+        type="number"
+        onChange={(e) => setPrice(e.target.value)}
+        value={price}
+        required
+      />
+
+      <label>Year Published:</label>
+      <input
+        type="number"
+        onChange={(e) => setYearPublished(e.target.value)}
+        value={yearPublished}
+        required
+      />
+
+      <button>Add Book</button>
+      {error && <div className="error">{error}</div>}
+    </form>
+  )
 }
 
 export default BookForm

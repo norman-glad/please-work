@@ -51,29 +51,26 @@ const bookSchema = new mongoose.Schema({
         immutable: true
     }
 }, {
-        // Enable virtuals to be included when converting to JSON
+        //  virtuals to be included when converting to JSON
         toJSON: { 
             virtuals: true,
-            getters: true // Ensures price getter is applied when converting to JSON
+            getters: true 
         },
         toObject: { 
             virtuals: true,
-            getters: true // Ensures price getter is applied when converting to object
+            getters: true 
         }
 });
 
-// Optional: Add a virtual for formatted price
 bookSchema.virtual('formattedPrice').get(function () {
     return `$${this.price.toFixed(2)}`;
 });
 
-// Optional: Validation hook to update updatedAt
 bookSchema.pre('save', function (next) {
     this.updatedAt = Date.now();
     next();
 });
 
-// Create and export the Book model
 const Book = mongoose.model('Book', bookSchema);
 
 module.exports = Book;

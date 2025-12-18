@@ -1,0 +1,156 @@
+### ============================================
+### CONFIGURATION 
+### ============================================
+
+# Server (local)
+@baseUrl = http://localhost:5555
+# @baseUrl = https://your-production-server.com
+
+
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NDM4YTI2OWNmNWNiMDZlY2VmOWI1MCIsImVtYWlsIjoiam9obkBleGFtcGxlLmNvbSIsImlhdCI6MTc2NjAzMzk1OCwiZXhwIjoxNzY2MDM3NTU4fQ.X-cEenih9eZpt6Oi87y_ukFm_4jgZ3ciSTWENYZy0Hs
+
+### ============================================
+### AUTHENTICATION 
+### ============================================
+
+### Sign Up 
+# @name signup
+POST {{baseUrl}}/api/signup
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "securePassword123"
+}
+
+### Sign In
+# @name signin
+POST {{baseUrl}}/api/signin
+Content-Type: application/json
+
+{
+    "email": "john@example.com",
+    "password": "securePassword123"
+}
+
+### Sign Out
+GET {{baseUrl}}/api/signout
+
+### ============================================
+### BOOK CRUD ENDPOINTS
+### ============================================
+
+### Get All Books (Public)
+GET {{baseUrl}}/api
+
+### Get Book by ID (Public)
+@bookId = 69438aa69cf5cb06ecef9b55
+GET {{baseUrl}}/api/{{bookId}}
+
+### Create a New Book
+# @name createBook
+POST {{baseUrl}}/api
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "price": 12.99,
+    "yearPublished": 1925
+}
+
+### Update Book by ID
+PUT {{baseUrl}}/api/{{bookId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "title": "The Great Gatsby - Updated Edition",
+    "author": "F. Scott Fitzgerald",
+    "price": 15.99,
+    "yearPublished": 1925
+}
+
+### Delete Book by ID (Protected - requires auth)
+DELETE {{baseUrl}}/api/{{bookId}}
+Authorization: Bearer {{authToken}}
+
+### ============================================
+### ERROR TESTING
+### ============================================
+
+### Test: Missing Authorization Header
+POST {{baseUrl}}/api
+Content-Type: application/json
+
+{
+    "title": "Unauthorized Book",
+    "author": "Test Author",
+    "price": 9.99,
+    "yearPublished": 2023
+}
+
+### Test: Invalid Token Format
+POST {{baseUrl}}/api
+Content-Type: application/json
+Authorization: InvalidFormat token123
+
+{
+    "title": "Invalid Token Book",
+    "author": "Test Author",
+    "price": 9.99,
+    "yearPublished": 2023
+}
+
+### Test: Invalid Book ID
+GET {{baseUrl}}/api/invalid-id-format
+
+### Test: Non-existent Book ID
+GET {{baseUrl}}/api/000000000000000000000000
+
+### Test: Sign In with wrong password
+POST {{baseUrl}}/api/signin
+Content-Type: application/json
+
+{
+    "email": "john@example.com",
+    "password": "wrongPassword"
+}
+
+### Test: Sign In with non-existent email
+POST {{baseUrl}}/api/signin
+Content-Type: application/json
+
+{
+    "email": "nonexistent@example.com",
+    "password": "anyPassword"
+}
+
+### Test: Missing required fields on signup
+POST {{baseUrl}}/api/signup
+Content-Type: application/json
+
+{
+    "email": "incomplete@example.com"
+}
+
+### Test: Invalid book data (missing required fields)
+POST {{baseUrl}}/api
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "title": "Incomplete Book"
+}
+
+### ============================================
+### CORS TESTING
+### ============================================
+
+### OPTIONS Preflight Request
+OPTIONS {{baseUrl}}/api
+Origin: http://localhost:3000
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: Content-Type, Authorization
